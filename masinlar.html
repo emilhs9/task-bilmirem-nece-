@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maşın Kataloqu</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #222;
+        }
+
+        .bas {
+            min-height: 700px;
+            padding: 35px;
+            position: relative;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px #00000010;
+        }
+
+        .sebet {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            padding: 12px 25px;
+            border: 1px solid #222;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .sebet:hover {
+            background: #222;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .kataloq {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .masin {
+            padding: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background: white;
+            transition: .3s;
+            animation: giris .6s ease;
+        }
+
+        .masin:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px #00000015;
+        }
+
+        .masin img {
+            width: 100%;
+            height: 200px;
+            display: block;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: .4s;
+        }
+
+        .masin:hover img {
+            transform: scale(1.04);
+        }
+
+        .masin h3 {
+            margin: 12px 5px 8px;
+        }
+
+        .masin p {
+            margin: 6px 5px;
+            color: #666;
+        }
+
+        .sec {
+            float: right;
+            margin-top: -32px;
+            padding: 8px 15px;
+            border: 1px solid #222;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .sec:hover {
+            background: #222;
+            color: white;
+            transform: scale(1.05);
+        }
+
+
+
+        @keyframes giris {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+        @media (max-width: 1000px) {
+            .kataloq {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .bas {
+                padding: 20px;
+            }
+
+            .kataloq {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bas">
+
+        <button class="sebet" onclick="window.location.href='sebet.html'">Səbət</button>
+
+        <div class="kataloq" id="kataloq"></div>
+
+    </div>
+
+    <script>
+        let arr = [
+            {
+                ad: "Mercedes G-Class",
+                motor: "4.0",
+                qiymet: 200,
+                sekil: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600"
+            },
+            {
+                ad: "BMW M5",
+                motor: "4.4",
+                qiymet: 180,
+                sekil: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600"
+            },
+            {
+                ad: "Audi RS7",
+                motor: "4.0",
+                qiymet: 190,
+                sekil: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600"
+            },
+            {
+                ad: "Porsche 911",
+                motor: "3.0",
+                qiymet: 220,
+                sekil: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600"
+            }
+        ];
+
+        let sec = JSON.parse(localStorage.getItem('sebet_arr')) || [];
+
+        function yukle() {
+            kataloq.innerHTML = arr.map((m, i) => `
+                <div class="masin">
+                    <img src="${m.sekil}">
+                    <h3>${m.ad}</h3>
+                    <p>Motor: ${m.motor}</p>
+                    <p>Qiymət: ${m.qiymet} AZN</p>
+                    <button class="sec" onclick="elave(${i})">Səbət</button>
+                </div>
+            `).join("");
+        }
+
+        function elave(i) {
+            sec.push(arr[i]);
+            localStorage.setItem('sebet_arr', JSON.stringify(sec));
+            alert(arr[i].ad + " səbətə əlavə edildi!");
+        }
+
+        yukle();
+    </script>
+
+</body>
+
+</html>
