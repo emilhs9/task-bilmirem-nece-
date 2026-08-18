@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OcaqAvto - Arzuladığın avtomobili tap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --esas-reng: #e60000;
+            --esas-hover: #b30000;
+            --tund-reng: #111;
+            --boz-reng: #666;
+            --aciq-boz: #f5f5f5;
+            --kenar-reng: #eaeaea;
+            --ag: #fff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--aciq-boz);
+            color: var(--tund-reng);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+            outline: none;
+            border: none;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--kenar-reng);
+        }
+
+        .loqo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--tund-reng);
+        }
+
+        .loqo span {
+            color: var(--esas-reng);
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--tund-reng);
+            transition: var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--esas-reng);
+        }
+
+        .header-sag {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .sebet-btn {
+            background: var(--tund-reng);
+            color: var(--ag);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .sebet-btn:hover {
+            background: var(--esas-reng);
+        }
+
+        .sebet-say {
+            background: var(--ag);
+            color: var(--tund-reng);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .mobil-menu-btn {
+            display: none;
+            background: none;
+            font-size: 24px;
+            color: var(--tund-reng);
+        }
+
+        /* HERO */
+        .hero {
+            margin-top: 80px;
+            height: 500px;
+            background: linear-gradient(rgba(17, 17, 17, 0.4), rgba(17, 17, 17, 0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            color: var(--ag);
+        }
+
+        .hero-mezmun {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* ESAS HISSE (FILTER VE KATALOQ) */
+        .esas {
+            padding: 60px 5%;
+            display: flex;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .filter-panel {
+            width: 280px;
+            flex-shrink: 0;
+            background: var(--ag);
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid var(--kenar-reng);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .filter-panel h2 {
+            font-size: 18px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--kenar-reng);
+        }
+
+        .f-qrup {
+            margin-bottom: 16px;
+        }
+
+        .f-qrup label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--boz-reng);
+            margin-bottom: 6px;
+        }
+
+        .f-qrup select, .f-qrup input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--kenar-reng);
+            border-radius: 6px;
+            font-size: 14px;
+            background: var(--ag);
+            transition: var(--transition);
+        }
+
+        .f-qrup select:focus, .f-qrup input:focus {
+            border-color: var(--tund-reng);
+        }
+
+        .f-siralar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .f-btnlar {
+            display: flex;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-esas {
+            background: var(--tund-reng);
+            color: var(--ag);
+        }
+
+        .btn-esas:hover {
+            background: var(--esas-reng);
+        }
+
+        .btn-sade {
+            background: var(--aciq-boz);
+            color: var(--tund-reng);
+        }
+
+        .btn-sade:hover {
+            background: #e0e0e0;
+        }
+
+        .kataloq-hisse {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .axtaris-qutu {
+            margin-bottom: 30px;
+        }
+
+        .axtaris-qutu input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--kenar-reng);
+            border-radius: 8px;
+            font-size: 16px;
+            background: var(--ag);
+            transition: var(--transition);
+        }
+
+        .axtaris-qutu input:focus {
+            border-color: var(--tund-reng);
+            box-shadow: var(--shadow);
+        }
+
+        .kataloq {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* KART */
+        .kart {
+            background: var(--ag);
+            border: 1px solid var(--kenar-reng);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.4s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(10px); }
+        }
+
+        .kart:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-color: #ddd;
+        }
+
+        .kart-sekil-qutu {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: var(--aciq-boz);
+        }
+
+        .kart-sekil {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .kart:hover .kart-sekil {
+            transform: scale(1.03);
+        }
+
+        .kart-melumat {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .kart-basliq {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .kart-ad {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--tund-reng);
+        }
+
+        .kart-qiymet {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--esas-reng);
+            white-space: nowrap;
+        }
+
+        .kart-texniki {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .tex-item {
+            font-size: 13px;
+            color: var(--boz-reng);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .kart-duymeler {
+            display: flex;
+            gap: 10px;
+        }
+
+        .kart-duymeler .btn {
+            padding: 10px;
+        }
+
+        /* SEBET */
+        .sebet-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 400px;
+            max-width: 100%;
+            height: 100vh;
+            background: var(--ag);
+            box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+            z-index: 2000;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sebet-panel.aciq {
+            right: 0;
+        }
+
+        .sebet-basliq {
+            padding: 24px;
+            border-bottom: 1px solid var(--kenar-reng);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sebet-basliq h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .bagla-btn {
+            background: none;
+            font-size: 24px;
+            color: var(--boz-reng);
+            line-height: 1;
+        }
+
+        .bagla-btn:hover {
+            color: var(--tund-reng);
+        }
+
+        .sebet-mezmun {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .sebet-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--kenar-reng);
+        }
+
+        .s-sekil {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .s-melumat {
+            flex: 1;
+        }
+
+        .s-ad {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .s-qiymet {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--esas-reng);
+            margin-bottom: 12px;
+        }
+
+        .s-idare {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .miqdar-qutu {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--kenar-reng);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .m-btn {
+            background: var(--aciq-boz);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .m-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .m-say {
+            width: 32px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .s-sil {
+            background: none;
+            color: var(--boz-reng);
+            font-size: 13px;
+            text-decoration: underline;
+        }
+
+        .s-sil:hover {
+            color: var(--esas-reng);
+        }
+
+        .sebet-alt {
+            padding: 24px;
+            border-top: 1px solid var(--kenar-reng);
+            background: var(--ag);
+        }
+
+        .s-cem {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .bos-mesaj {
+            text-align: center;
+            color: var(--boz-reng);
+            padding: 40px 0;
+            font-size: 15px;
+        }
+
+        /* MODAL */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .overlay.aktiv {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -45%);
+            background: var(--ag);
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 12px;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal.aktiv {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%);
+        }
+
+        .m-sekil-qutu {
+            width: 50%;
+            background: var(--tund-reng);
+        }
+
+        .m-sekil-qutu img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .m-detal {
+            width: 50%;
+            padding: 40px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .m-bagla {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--aciq-boz);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--tund-reng);
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .m-bagla:hover {
+            background: #e0e0e0;
+        }
+
+        .m-basliq {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            padding-right: 30px;
+        }
+
+        .m-qiymet {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--esas-reng);
+            margin-bottom: 24px;
+        }
+
+        .m-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .m-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--kenar-reng);
+            font-size: 14px;
+        }
+
+        .m-list li span:first-child {
+            color: var(--boz-reng);
+        }
+
+        .m-list li span:last-child {
+            font-weight: 500;
+        }
+
+        /* CHECKOUT MODAL */
+        .checkout-modal {
+            max-width: 400px;
+            flex-direction: column;
+            padding: 30px;
+        }
+
+        .checkout-modal h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .esas { flex-direction: column; }
+            .filter-panel { width: 100%; position: static; }
+            .modal { flex-direction: column; width: 500px; max-width: 95%; max-height: 95vh; }
+            .m-sekil-qutu, .m-detal { width: 100%; }
+            .m-sekil-qutu { height: 250px; }
+            .m-detal { padding: 24px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--ag);
+                flex-direction: column;
+                gap: 0;
+                border-bottom: 1px solid var(--kenar-reng);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: 0.3s ease;
+            }
+            .nav.aktiv {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            .nav a {
+                padding: 16px 5%;
+                border-bottom: 1px solid var(--kenar-reng);
+            }
+            .nav a:last-child { border: none; }
+            .mobil-menu-btn { display: block; }
+            .hero h1 { font-size: 36px; }
+            .kataloq { grid-template-columns: 1fr; }
+
+            .sebet-panel { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="loqo">Ocaq<span>Avto</span></a>
+        <nav class="nav" id="nav-menu">
+            <a href="#" onclick="menuBagla()">Ana səhifə</a>
+            <a href="#avtomobillər" onclick="menuBagla()">Avtomobillər</a>
+
+
+        </nav>
+        <div class="header-sag">
+            <button class="sebet-btn" onclick="sebetGoster()">
+                Səbət <span class="sebet-say" id="sebet-say">0</span>
+            </button>
+            <button class="mobil-menu-btn" onclick="menuToggle()">☰</button>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-mezmun">
+            <h1>Arzuladığın avtomobili OcaqAvto-da tap</h1>
+            <p>Seçilmiş, yoxlanılmış və zəmanətli avtomobillərin etibarlı ünvanı. Xəyalınızdakı avtomobilə asanlıqla sahib olun.</p>
+        </div>
+    </div>
+
+    <div class="esas" id="avtomobillər">
+        <aside class="filter-panel">
+            <h2>Filtrlər</h2>
+            <div class="f-qrup">
+                <label>Marka</label>
+                <select id="f-marka">
+                    <option value="">Bütün markalar</option>
+                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Porsche">Porsche</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Lexus">Lexus</option>
+                    <option value="Land Rover">Land Rover</option>
+                </select>
+            </div>
+            <div class="f-qrup">
+                <label>Yanacaq növü</label>
+                <select id="f-yanacaq">
+                    <option value="">Bütün növlər</option>
+                    <option value="Benzin">Benzin</option>
+                    <option value="Dizel">Dizel</option>
+                    <option value="Hibrid">Hibrid</option>
+                    <option value="Elektrik">Elektrik</option>
+                </select>
+            </div>
+            <div class="f-qrup">
+                <label>Sürətlər qutusu</label>
+                <select id="f-qutu">
+                    <option value="">Bütün növlər</option>
+                    <option value="Avtomat">Avtomat</option>
+                    <option value="Mexanika">Mexanika</option>
+                </select>
+            </div>
+            <div class="f-siralar">
+                <div class="f-qrup" style="flex:1">
+                    <label>Min Qiymət</label>
+                    <input type="number" id="f-min-q" placeholder="AZN">
+                </div>
+                <div class="f-qrup" style="flex:1">
+                    <label>Max Qiymət</label>
+                    <input type="number" id="f-max-q" placeholder="AZN">
+                </div>
+            </div>
+            <div class="f-siralar">
+                <div class="f-qrup" style="flex:1">
+                    <label>İl (dan)</label>
+                    <input type="number" id="f-min-i" placeholder="2000">
+                </div>
+                <div class="f-qrup" style="flex:1">
+                    <label>İl (dək)</label>
+                    <input type="number" id="f-max-i" placeholder="2024">
+                </div>
+            </div>
+            <div class="f-btnlar">
+                <button class="btn btn-sade" onclick="sifirla()">Sıfırla</button>
+                <button class="btn btn-esas" onclick="axtar()">Axtar</button>
+            </div>
+        </aside>
+
+        <main class="kataloq-hisse">
+            <div class="axtaris-qutu">
+                <input type="text" id="axtaris-text" placeholder="Avtomobilin adı və ya modelinə görə axtar..." onkeyup="axtar()">
+            </div>
+            <div class="kataloq" id="kataloq"></div>
+        </main>
+    </div>
+
+
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay" onclick="bagla()"></div>
+
+    <!-- SEBET PANEL -->
+    <div class="sebet-panel" id="sebet-panel">
+        <div class="sebet-basliq">
+            <h2>Səbət</h2>
+            <button class="bagla-btn" onclick="sebetGizlet()">&times;</button>
+        </div>
+        <div class="sebet-mezmun" id="sebet-siyahi"></div>
+        <div class="sebet-alt">
+            <div class="s-cem">
+                <span>Ümumi məbləğ:</span>
+                <span id="cem-qiymet">0 AZN</span>
+            </div>
+            <button class="btn btn-esas" style="width:100%; margin-bottom:10px;" onclick="checkoutAc()">Sifarişi tamamla</button>
+            <button class="btn btn-sade" style="width:100%; color:#d32f2f" onclick="sebetTemizle()">Səbəti təmizlə</button>
+        </div>
+    </div>
+
+    <!-- DETAL MODAL -->
+    <div class="modal" id="modal-detal">
+        <div class="m-sekil-qutu">
+            <img src="" id="md-sekil">
+        </div>
+        <div class="m-detal">
+            <button class="m-bagla" onclick="bagla()">&times;</button>
+            <div class="m-basliq" id="md-ad"></div>
+            <div class="m-qiymet" id="md-qiymet"></div>
+            <ul class="m-list">
+                <li><span>İl</span> <span id="md-il"></span></li>
+                <li><span>Mühərrik</span> <span id="md-motor"></span></li>
+                <li><span>Yanacaq</span> <span id="md-yanacaq"></span></li>
+                <li><span>Sürətlər qutusu</span> <span id="md-qutu"></span></li>
+                <li><span>Kuzov</span> <span id="md-kuzov"></span></li>
+                <li><span>Rəng</span> <span id="md-reng"></span></li>
+                <li><span>Yürüş</span> <span id="md-yurus"></span></li>
+                <li><span>Şəhər</span> <span id="md-seher"></span></li>
+            </ul>
+            <button class="btn btn-esas" style="width:100%" id="md-btn">Səbətə əlavə et</button>
+        </div>
+    </div>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal checkout-modal" id="modal-checkout">
+        <button class="m-bagla" onclick="bagla()">&times;</button>
+        <h2>Sifarişi tamamla</h2>
+        <div class="f-qrup">
+            <input type="text" id="c-ad" placeholder="Ad">
+        </div>
+        <div class="f-qrup">
+            <input type="text" id="c-soyad" placeholder="Soyad">
+        </div>
+        <div class="f-qrup">
+            <input type="text" id="c-tel" placeholder="Telefon">
+        </div>
+        <div class="f-qrup">
+            <input type="email" id="c-email" placeholder="E-poçt">
+        </div>
+        <div class="f-qrup">
+            <input type="text" id="c-seher" placeholder="Şəhər">
+        </div>
+        <button class="btn btn-esas" style="width:100%; margin-top:10px;" onclick="sifarisEt()">Sifarişi təsdiqlə</button>
+    </div>
+
+    <script>
+        // MƏLUMATLAR
+        let arr = [
+            { id: 1, marka: "Mercedes-Benz", model: "S-Class S 500", il: 2022, motor: "3.0 L", yanacaq: "Hibrid", qutu: "Avtomat", qiymet: 245000, kuzov: "Sedan", reng: "Qara", yurus: "12 000 km", seher: "Bakı", sekil: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800" },
+            { id: 2, marka: "BMW", model: "M5 Competition", il: 2021, motor: "4.4 L", yanacaq: "Benzin", qutu: "Avtomat", qiymet: 215000, kuzov: "Sedan", reng: "Göy", yurus: "28 000 km", seher: "Bakı", sekil: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800" },
+            { id: 3, marka: "Audi", model: "RS Q8", il: 2023, motor: "4.0 L", yanacaq: "Benzin", qutu: "Avtomat", qiymet: 275000, kuzov: "Offroader", reng: "Boz", yurus: "5 000 km", seher: "Bakı", sekil: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800" },
+            { id: 4, marka: "Porsche", model: "911 Carrera S", il: 2022, motor: "3.0 L", yanacaq: "Benzin", qutu: "Avtomat", qiymet: 310000, kuzov: "Kupe", reng: "Qırmızı", yurus: "8 000 km", seher: "Bakı", sekil: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800" },
+            { id: 5, marka: "Toyota", model: "Land Cruiser 300", il: 2023, motor: "3.5 L", yanacaq: "Benzin", qutu: "Avtomat", qiymet: 185000, kuzov: "Offroader", reng: "Ağ", yurus: "0 km", seher: "Bakı", sekil: "https://images.unsplash.com/photo-1599818838381-8b27341ea22b?w=800" },
+            { id: 6, marka: "Land Rover", model: "Range Rover", il: 2023, motor: "4.4 L", yanacaq: "Benzin", qutu: "Avtomat", qiymet: 350000, kuzov: "Offroader", reng: "Qara", yurus: "2 000 km", seher: "Bakı", sekil: "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?w=800" },
+            { id: 7, marka: "Lexus", model: "LX 600", il: 2022, motor: "3.5 L", yanacaq: "Benzin", qutu: "Avtomat", qiymet: 295000, kuzov: "Offroader", reng: "Ağ", yurus: "15 000 km", seher: "Bakı", sekil: "https://images.unsplash.com/photo-1619682817481-e994891cd1f5?w=800" },
+            { id: 8, marka: "Mercedes-Benz", model: "G 63 AMG", il: 2021, motor: "4.0 L", yanacaq: "Benzin", qutu: "Avtomat", qiymet: 320000, kuzov: "Offroader", reng: "Qara", yurus: "35 000 km", seher: "Bakı", sekil: "https://images.unsplash.com/photo-1520031441872-265e4ff70366?w=800" },
+            { id: 9, marka: "Audi", model: "e-tron GT", il: 2023, motor: "Elektrik", yanacaq: "Elektrik", qutu: "Avtomat", qiymet: 220000, kuzov: "Sedan", reng: "Boz", yurus: "1 000 km", seher: "Bakı", sekil: "https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?w=800" },
+            { id: 10, marka: "Toyota", model: "Camry", il: 2020, motor: "2.5 L", yanacaq: "Hibrid", qutu: "Avtomat", qiymet: 55000, kuzov: "Sedan", reng: "Ağ", yurus: "60 000 km", seher: "Sumqayıt", sekil: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800" }
+        ];
+
+        let gosterilen = arr;
+        let sebet = JSON.parse(localStorage.getItem('ocaqavto_sebet')) || [];
+
+        // DOM ELEMENTLƏRİ
+        const kat = document.getElementById("kataloq");
+        const sSiyahi = document.getElementById("sebet-siyahi");
+        const overlay = document.getElementById("overlay");
+        const sPanel = document.getElementById("sebet-panel");
+        const mDetal = document.getElementById("modal-detal");
+        const mCheck = document.getElementById("modal-checkout");
+
+        // KATALOQ
+        function yukle() {
+            if (gosterilen.length === 0) {
+                kat.innerHTML = "<div class='bos-mesaj'>Uyğun avtomobil tapılmadı.</div>";
+                return;
+            }
+            kat.innerHTML = gosterilen.map((m, i) => `
+                <div class="kart" style="animation-delay: ${i * 0.05}s">
+                    <div class="kart-sekil-qutu">
+                        <img src="${m.sekil}" class="kart-sekil">
+                    </div>
+                    <div class="kart-melumat">
+                        <div class="kart-basliq">
+                            <div class="kart-ad">${m.marka} ${m.model}</div>
+                        </div>
+                        <div class="kart-qiymet">${m.qiymet.toLocaleString()} AZN</div>
+                        <div class="kart-texniki">
+                            <div class="tex-item">📅 ${m.il}</div>
+                            <div class="tex-item">⚙️ ${m.motor}</div>
+                            <div class="tex-item">⛽ ${m.yanacaq}</div>
+                            <div class="tex-item">🕹️ ${m.qutu}</div>
+                        </div>
+                        <div class="kart-duymeler">
+                            <button class="btn btn-sade" onclick="goster(${m.id})">Ətraflı bax</button>
+                            <button class="btn btn-esas" onclick="elave(${m.id})">Səbətə əlavə et</button>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        // AXTARIŞ VƏ FİLTER
+        function axtar() {
+            let soz = document.getElementById("axtaris-text").value.toLowerCase();
+            let marka = document.getElementById("f-marka").value;
+            let yanacaq = document.getElementById("f-yanacaq").value;
+            let qutu = document.getElementById("f-qutu").value;
+            let minQ = parseInt(document.getElementById("f-min-q").value) || 0;
+            let maxQ = parseInt(document.getElementById("f-max-q").value) || Infinity;
+            let minI = parseInt(document.getElementById("f-min-i").value) || 0;
+            let maxI = parseInt(document.getElementById("f-max-i").value) || Infinity;
+
+            gosterilen = arr.filter(m => {
+                let textUygun = (m.marka + " " + m.model).toLowerCase().includes(soz);
+                let markaUygun = marka ? m.marka === marka : true;
+                let yanacaqUygun = yanacaq ? m.yanacaq === yanacaq : true;
+                let qutuUygun = qutu ? m.qutu === qutu : true;
+                let qiymetUygun = m.qiymet >= minQ && m.qiymet <= maxQ;
+                let ilUygun = m.il >= minI && m.il <= maxI;
+                
+                return textUygun && markaUygun && yanacaqUygun && qutuUygun && qiymetUygun && ilUygun;
+            });
+            yukle();
+        }
+
+        function sifirla() {
+            document.getElementById("axtaris-text").value = "";
+            document.getElementById("f-marka").value = "";
+            document.getElementById("f-yanacaq").value = "";
+            document.getElementById("f-qutu").value = "";
+            document.getElementById("f-min-q").value = "";
+            document.getElementById("f-max-q").value = "";
+            document.getElementById("f-min-i").value = "";
+            document.getElementById("f-max-i").value = "";
+            axtar();
+        }
+
+        // MODAL DETAL
+        function goster(id) {
+            let m = arr.find(x => x.id === id);
+            if (!m) return;
+            
+            document.getElementById("md-sekil").src = m.sekil;
+            document.getElementById("md-ad").innerText = `${m.marka} ${m.model}`;
+            document.getElementById("md-qiymet").innerText = `${m.qiymet.toLocaleString()} AZN`;
+            document.getElementById("md-il").innerText = m.il;
+            document.getElementById("md-motor").innerText = m.motor;
+            document.getElementById("md-yanacaq").innerText = m.yanacaq;
+            document.getElementById("md-qutu").innerText = m.qutu;
+            document.getElementById("md-kuzov").innerText = m.kuzov;
+            document.getElementById("md-reng").innerText = m.reng;
+            document.getElementById("md-yurus").innerText = m.yurus;
+            document.getElementById("md-seher").innerText = m.seher;
+            
+            document.getElementById("md-btn").onclick = () => { elave(id); bagla(); };
+            
+            overlay.classList.add("aktiv");
+            mDetal.classList.add("aktiv");
+        }
+
+        // SƏBƏT MƏNTİQİ
+        function elave(id) {
+            let m = arr.find(x => x.id === id);
+            let sec = sebet.find(x => x.id === id);
+            
+            if (sec) {
+                sec.say++;
+            } else {
+                sebet.push({ ...m, say: 1 });
+            }
+            sebetYenile();
+            sebetGoster();
+        }
+
+        function sil(id) {
+            sebet = sebet.filter(x => x.id !== id);
+            sebetYenile();
+        }
+
+        function deyis(id, ferq) {
+            let sec = sebet.find(x => x.id === id);
+            if (sec) {
+                sec.say += ferq;
+                if (sec.say < 1) sec.say = 1;
+                sebetYenile();
+            }
+        }
+
+        function sebetTemizle() {
+            sebet = [];
+            sebetYenile();
+        }
+
+        function sebetYenile() {
+            localStorage.setItem('ocaqavto_sebet', JSON.stringify(sebet));
+            
+            let cem = 0;
+            let say = 0;
+            
+            if (sebet.length === 0) {
+                sSiyahi.innerHTML = "<div class='bos-mesaj'>Səbətiniz boşdur</div>";
+            } else {
+                sSiyahi.innerHTML = sebet.map(m => {
+                    cem += m.qiymet * m.say;
+                    say += m.say;
+                    return `
+                        <div class="sebet-item">
+                            <img src="${m.sekil}" class="s-sekil">
+                            <div class="s-melumat">
+                                <div class="s-ad">${m.marka} ${m.model}</div>
+                                <div class="s-qiymet">${m.qiymet.toLocaleString()} AZN</div>
+                                <div class="s-idare">
+                                    <div class="miqdar-qutu">
+                                        <button class="m-btn" onclick="deyis(${m.id}, -1)">-</button>
+                                        <div class="m-say">${m.say}</div>
+                                        <button class="m-btn" onclick="deyis(${m.id}, 1)">+</button>
+                                    </div>
+                                    <button class="s-sil" onclick="sil(${m.id})">Sil</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join("");
+            }
+            
+            document.getElementById("cem-qiymet").innerText = cem.toLocaleString() + " AZN";
+            document.getElementById("sebet-say").innerText = say;
+        }
+
+        // UI KONTROL
+        function sebetGoster() {
+            overlay.classList.add("aktiv");
+            sPanel.classList.add("aciq");
+            menuBagla();
+        }
+
+        function sebetGizlet() {
+            sPanel.classList.remove("aciq");
+            yoxlaOverlay();
+        }
+
+        function checkoutAc() {
+            if (sebet.length === 0) return;
+            sebetGizlet();
+            overlay.classList.add("aktiv");
+            mCheck.classList.add("aktiv");
+        }
+
+        function bagla() {
+            sebetGizlet();
+            mDetal.classList.remove("aktiv");
+            mCheck.classList.remove("aktiv");
+            overlay.classList.remove("aktiv");
+        }
+
+        function yoxlaOverlay() {
+            if (!mDetal.classList.contains("aktiv") && !mCheck.classList.contains("aktiv")) {
+                overlay.classList.remove("aktiv");
+            }
+        }
+
+        function sifarisEt() {
+            let ad = document.getElementById("c-ad").value.trim();
+            let soyad = document.getElementById("c-soyad").value.trim();
+            let tel = document.getElementById("c-tel").value.trim();
+            let email = document.getElementById("c-email").value.trim();
+            let seher = document.getElementById("c-seher").value.trim();
+            
+            if (!ad || !soyad || !tel || !email || !seher) {
+                alert("Zəhmət olmasa bütün məlumatları doldurun.");
+                return;
+            }
+            
+            alert("Sifarişiniz uğurla qəbul edildi. Təşəkkür edirik!");
+            
+            document.getElementById("c-ad").value = "";
+            document.getElementById("c-soyad").value = "";
+            document.getElementById("c-tel").value = "";
+            document.getElementById("c-email").value = "";
+            document.getElementById("c-seher").value = "";
+            
+            sebetTemizle();
+            bagla();
+        }
+
+
+
+        // MOBIL MENU
+        const navMenu = document.getElementById("nav-menu");
+        
+        function menuToggle() {
+            navMenu.classList.toggle("aktiv");
+        }
+        
+        function menuBagla() {
+            navMenu.classList.remove("aktiv");
+        }
+
+        // BAŞLANĞIC
+        yukle();
+        sebetYenile();
+    </script>
+</body>
+</html>

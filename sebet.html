@@ -1,40 +1,177 @@
 <!DOCTYPE html>
 <html lang="az">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Səbət</title>
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; padding: 30px; font-family: Arial, sans-serif; background: #f4f4f4; color: #222; }
-        .bas { min-height: 700px; padding: 35px; position: relative; background: white; border: 1px solid #ddd; border-radius: 20px; box-shadow: 0 10px 30px #00000010; max-width: 800px; margin: 0 auto; }
-        .geri { position: absolute; top: 35px; right: 35px; padding: 10px 20px; border: 1px solid #222; border-radius: 10px; background: white; cursor: pointer; transition: .3s; text-decoration: none; color: black; font-weight: bold; }
-        .geri:hover { background: #222; color: white; transform: translateY(-2px); }
-        h1 { margin-top: 0; padding-bottom: 15px; border-bottom: 2px solid #eee; }
-        .sebet-siyahi { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
-        .sebet-item { display: flex; align-items: center; padding: 15px; border: 1px solid #ddd; border-radius: 15px; background: #fafafa; transition: .3s; }
-        .sebet-item:hover { box-shadow: 0 5px 15px #00000010; transform: translateY(-2px); }
-        .sebet-item img { width: 150px; height: 100px; object-fit: cover; border-radius: 10px; margin-right: 25px; }
-        .sebet-item-melumat { flex-grow: 1; }
-        .sebet-item h3 { margin: 0 0 8px 0; font-size: 1.2rem; }
-        .sebet-item p { margin: 4px 0; color: #555; font-size: 0.95rem; }
-        .qiymet-tag { font-weight: bold; color: #222; font-size: 1.1rem; margin-top: 5px !important; }
-        .sil { padding: 10px 18px; border: 1px solid #ff4d4d; border-radius: 8px; background: white; color: #ff4d4d; font-weight: bold; cursor: pointer; transition: .3s; }
-        .sil:hover { background: #ff4d4d; color: white; }
-        .cemi { margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee; font-size: 24px; font-weight: bold; text-align: right; }
-        .bos-mesaj { text-align: center; color: #888; font-size: 1.2rem; margin-top: 50px; }
-        
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #222;
+        }
+
+        .bas {
+            min-height: 700px;
+            padding: 35px;
+            position: relative;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px #00000010;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .geri {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            padding: 10px 20px;
+            border: 1px solid #222;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .geri:hover {
+            background: #222;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .sebet-siyahi {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .sebet-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background: #fafafa;
+            transition: .3s;
+        }
+
+        .sebet-item:hover {
+            box-shadow: 0 5px 15px #00000010;
+            transform: translateY(-2px);
+        }
+
+        .sebet-item img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 25px;
+        }
+
+        .sebet-item-melumat {
+            flex-grow: 1;
+        }
+
+        .sebet-item h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.2rem;
+        }
+
+        .sebet-item p {
+            margin: 4px 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .qiymet-tag {
+            font-weight: bold;
+            color: #222;
+            font-size: 1.1rem;
+            margin-top: 5px !important;
+        }
+
+        .sil {
+            padding: 10px 18px;
+            border: 1px solid #ff4d4d;
+            border-radius: 8px;
+            background: white;
+            color: #ff4d4d;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .sil:hover {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .cemi {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .bos-mesaj {
+            text-align: center;
+            color: #888;
+            font-size: 1.2rem;
+            margin-top: 50px;
+        }
+
         @media (max-width: 600px) {
-            .sebet-item { flex-direction: column; text-align: center; }
-            .sebet-item img { width: 100%; height: 150px; margin-right: 0; margin-bottom: 15px; }
-            .sil { margin-top: 15px; width: 100%; }
-            .geri { position: static; display: block; text-align: center; margin-bottom: 20px; }
+            .sebet-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .sebet-item img {
+                width: 100%;
+                height: 150px;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .sil {
+                margin-top: 15px;
+                width: 100%;
+            }
+
+            .geri {
+                position: static;
+                display: block;
+                text-align: center;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="bas">
-        <a href="masinlar.html" class="geri">Geri Qayıt</a>
+        <a href="index.html" class="geri">Geri Qayıt</a>
         <h1>Səbətiniz</h1>
         <div class="sebet-siyahi" id="sebet-siyahi"></div>
         <div class="cemi" id="cemi"></div>
@@ -81,4 +218,5 @@
         yukleSebet();
     </script>
 </body>
+
 </html>
